@@ -17,3 +17,9 @@ results = detect_pii(sample_text)
 for r in results:
     detected_text = sample_text[r.start:r.end]
     print(f"Found: '{detected_text}' | Type: {r.entity_type} | Score: {r.score:.2f}")
+
+from core.anonymizer import anonymize_text
+
+anonymized = anonymize_text(sample_text, results, strategy="replace")
+print("\n--- ANONYMIZED OUTPUT ---")
+print(anonymized)

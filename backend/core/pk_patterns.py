@@ -9,7 +9,7 @@ CNIC_REGEX = r"\d{5}-\d{7}-\d{1}"
 PK_MOBILE_REGEX = r"(\+92|0)3\d{2}-?\d{7}"
 
 # PK Landline: 2-4 digit city code - 6-8 digit number (e.g. 042-35761234)
-PK_LANDLINE_REGEX = r"0\d{2,4}-\d{6,8}"
+PK_LANDLINE_REGEX = r"0(?!3)\d{1,3}-\d{6,8}"
 
 
 def get_pk_recognizers():
