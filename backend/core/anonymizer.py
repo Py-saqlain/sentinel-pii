@@ -7,7 +7,7 @@ anonymizer_engine = AnonymizerEngine()
 
 # Minimum confidence score required to keep a detection.
 # Anything below this is treated as noise and ignored.
-SCORE_THRESHOLD = 0.4
+from config.settings import SCORE_THRESHOLD
 
 
 def anonymize_text(text: str, analyzer_results: list, strategy: str = "mask"):

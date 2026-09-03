@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.anonymize import router as anonymize_router
+from config.settings import CORS_ALLOWED_ORIGINS
 
 app = FastAPI(title="Sentinel-PII API")
 
@@ -10,7 +11,7 @@ app = FastAPI(title="Sentinel-PII API")
 # Without this, the browser blocks the request for security reasons.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for local dev only — we'll restrict this later for production
+    allow_origins=CORS_ALLOWED_ORIGINS,  # for local dev only — we'll restrict this later for production
     allow_methods=["*"],
     allow_headers=["*"],
 )
