@@ -6,3 +6,4 @@ spacy
 presidio-analyzer
 presidio-anonymizer
 groq
+gradio
