@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://py-saqlain-sentinel-pii-backend.hf.space";
 
 export async function anonymizeText(text, strategy) {
   const response = await axios.post(`${API_BASE_URL}/anonymize`, {
