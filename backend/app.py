@@ -1,17 +1,15 @@
+import os
 import gradio as gr
 import spaces
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.anonymize import router as anonymize_router
 
-# Dummy function required to satisfy HF's ZeroGPU tier — not used for actual GPU work.
 @spaces.GPU(duration=1)
 def _dummy_gpu_check():
     return "ok"
 
-with gr.Blocks() as demo:
-    gr.Markdown("## Sentinel-PII Backend\nThis is the API server.")
-
-app = demo.app
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,5 +20,15 @@ app.add_middleware(
 
 app.include_router(anonymize_router)
 
+@app.get("/")
+def root():
+    return {"status": "Sentinel-PII API running", "docs": "/docs", "ui": "/ui"}
+
+with gr.Blocks() as demo:
+    gr.Markdown("## Sentinel-PII Backend\nAPI is running. See `/docs` for Swagger UI.")
+
+app = gr.mount_gradio_app(app, demo, path="/ui")
+
 if __name__ == "__main__":
-    demo.launch()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 7860)))
